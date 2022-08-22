@@ -1,10 +1,10 @@
 package com.metaxiii.fr.goodapi.dto;
 
-import com.metaxiii.fr.goodapi.enums.Power;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
-import javax.persistence.Transient;
-
+@SuperBuilder
+@NoArgsConstructor
 public abstract class EmployeeDTO {
-    @Transient
-    public abstract Power getPower();
+
 }

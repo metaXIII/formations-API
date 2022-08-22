@@ -11,7 +11,7 @@ public interface EmployeeService {
 
     Optional<Employee> findById(UUID id);
 
-    Employee save(Employee toDomain);
+    Employee save(Employee employee);
 
 //    void createNewEmployee(EmployeeDto EmployeeDto);
 //

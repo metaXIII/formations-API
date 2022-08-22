@@ -27,8 +27,8 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee save(final Employee toDomain) {
-        return repository.save(toDomain);
+    public Employee save(final Employee employee) {
+        return repository.save(employee);
     }
 
     //    @Override
