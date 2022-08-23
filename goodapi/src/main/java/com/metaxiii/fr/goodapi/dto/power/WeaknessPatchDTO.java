@@ -1,7 +1,6 @@
 package com.metaxiii.fr.goodapi.dto.power;
 
 import com.metaxiii.fr.goodapi.dto.EmployeeDTO;
-import com.metaxiii.fr.goodapi.enums.Power;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,8 +15,8 @@ import javax.validation.constraints.NotNull;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PowerPatchDTO extends EmployeeDTO {
+public class WeaknessPatchDTO extends EmployeeDTO {
     @NotNull
     @NotEmpty
-    private String strength;
+    private String weakness;
 }

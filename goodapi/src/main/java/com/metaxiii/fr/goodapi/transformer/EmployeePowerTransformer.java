@@ -1,15 +1,15 @@
 package com.metaxiii.fr.goodapi.transformer;
 
 import com.metaxiii.fr.goodapi.dto.input.EmployeeInput;
-import com.metaxiii.fr.goodapi.dto.power.PowerPatchDTO;
+import com.metaxiii.fr.goodapi.dto.power.StrengthPatchDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmployeePowerTransformer extends AbstractEmployeeTransformer<EmployeeInput, PowerPatchDTO>
-        implements DTOCreator<EmployeeInput, PowerPatchDTO> {
+public class EmployeePowerTransformer extends AbstractEmployeeTransformer<EmployeeInput, StrengthPatchDTO>
+        implements DTOCreator<EmployeeInput, StrengthPatchDTO> {
 
     @Override
-    public EmployeeInput toDomain(final PowerPatchDTO employeeDTO) {
+    public EmployeeInput toDomain(final StrengthPatchDTO employeeDTO) {
         return super.toDomainInput(employeeDTO)
                 .strength(employeeDTO.getStrength())
                 .build();

@@ -14,12 +14,7 @@ import java.util.UUID;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EmployeeModel extends RepresentationModel<EmployeeModel> {
+public class SalaryModel extends RepresentationModel<SalaryModel> {
     private UUID id;
-    private String firstName;
-    private String lastName;
-    private String weakness;
-    private String strength;
-    private String role;
-    private SalaryModel salary;
+    private Long amount;
 }

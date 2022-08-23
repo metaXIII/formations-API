@@ -2,7 +2,7 @@ package com.metaxiii.fr.goodapi.creator;
 
 import com.metaxiii.fr.goodapi.dto.EmployeeDTO;
 import com.metaxiii.fr.goodapi.dto.input.EmployeeInput;
-import com.metaxiii.fr.goodapi.dto.power.PowerPatchDTO;
+import com.metaxiii.fr.goodapi.dto.power.StrengthPatchDTO;
 import com.metaxiii.fr.goodapi.enums.Power;
 import com.metaxiii.fr.goodapi.transformer.EmployeePowerTransformer;
 import com.metaxiii.fr.goodapi.transformer.EmployeeTransformerPlugin;
@@ -17,7 +17,7 @@ public class PowerCreatorPlugin implements EmployeeTransformerPlugin {
 
     @Override
     public EmployeeInput toDomain(final EmployeeDTO employeeDTO) {
-        return transformer.toDomain((PowerPatchDTO) employeeDTO);
+        return transformer.toDomain((StrengthPatchDTO) employeeDTO);
     }
 
     @Override

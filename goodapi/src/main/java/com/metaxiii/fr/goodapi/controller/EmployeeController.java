@@ -5,7 +5,8 @@ import com.metaxiii.fr.goodapi.config.EmployeeValidator;
 import com.metaxiii.fr.goodapi.creator.EmployeeCreator;
 import com.metaxiii.fr.goodapi.dto.EmployeeDTO;
 import com.metaxiii.fr.goodapi.dto.input.EmployeeInput;
-import com.metaxiii.fr.goodapi.dto.power.PowerPatchDTO;
+import com.metaxiii.fr.goodapi.dto.power.StrengthPatchDTO;
+import com.metaxiii.fr.goodapi.dto.power.WeaknessPatchDTO;
 import com.metaxiii.fr.goodapi.entity.Employee;
 import com.metaxiii.fr.goodapi.enums.Power;
 import com.metaxiii.fr.goodapi.exception.DatabindingException;
@@ -34,7 +35,7 @@ import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
-import static com.metaxiii.fr.goodapi.exception.ErrorCode.EMPLOYEE_NOT_FOUND;
+import static com.metaxiii.fr.goodapi.exception.ErrorCode.RESOURCE_NOT_FOUND;
 import static com.metaxiii.fr.goodapi.exception.ErrorCode.MISSING_PLUGINS;
 import static com.metaxiii.fr.goodapi.exception.ErrorCode.STEP_MODIFIED;
 import static org.springframework.http.HttpHeaders.IF_UNMODIFIED_SINCE;
@@ -61,7 +62,7 @@ public class EmployeeController {
     @Transactional
     public ResponseEntity<EmployeeModel> getEmployee(@PathVariable UUID id) {
         final Employee employee = service.findById(id)
-                .orElseThrow(() -> new EmployeeException(EMPLOYEE_NOT_FOUND, id));
+                .orElseThrow(() -> new EmployeeException(RESOURCE_NOT_FOUND, id));
         return new ResponseEntity<>(assembler.toModel(employee), HttpStatus.OK);
     }
 
@@ -73,12 +74,12 @@ public class EmployeeController {
     }
 
 
-    @PatchMapping(value = "update-power/{id}", consumes = "application/json-patch+json")
+    @PatchMapping(value = "update-strength/{id}", consumes = "application/json-patch+json")
     @Transactional
-    public ResponseEntity<EmployeeModel> updatePower(@PathVariable UUID id,
-                                                     @RequestHeader(name = IF_UNMODIFIED_SINCE) Instant
-                                                             ifUnmodifiedSince,
-                                                     @RequestBody @Valid PowerPatchDTO patchDTO) {
+    public ResponseEntity<EmployeeModel> updateStrength(@PathVariable UUID id,
+                                                        @RequestHeader(name = IF_UNMODIFIED_SINCE) Instant
+                                                                ifUnmodifiedSince,
+                                                        @RequestBody @Valid StrengthPatchDTO patchDTO) {
         final EmployeeModel employeeModel = service.findById(id)
                 .map(employee -> {
                     if (employee.getUpdateAt() != null && employee.getUpdateAt().isAfter(ifUnmodifiedSince)) {
@@ -91,62 +92,31 @@ public class EmployeeController {
                     return service.updatePower(creator.toDomain(input), employee);
                 })
                 .map(assembler::toModel)
-                .orElseThrow(() -> new EmployeeException(EMPLOYEE_NOT_FOUND, id));
-        return new ResponseEntity<>(employeeModel, HttpStatus.OK);
+                .orElseThrow(() -> new EmployeeException(RESOURCE_NOT_FOUND, id));
+        return new ResponseEntity<>(employeeModel, HttpStatus.ACCEPTED);
     }
 
-//    @PatchMapping(value = "update-power/{id}", consumes = "application/json-patch+json")
-//    @Transactional
-//    public ResponseEntity<EmployeeModel> updatePower(@PathVariable UUID id,
-//                                                     @RequestHeader(name = IF_UNMODIFIED_SINCE) Instant
-//                                                             ifUnmodifiedSince,
-//                                                     @RequestBody JsonPatch jsonPatch) {
-//        final EmployeeModel employeeModel = service.findById(id)
-//                .map(employee -> {
-//                    if (employee.getUpdateAt() != null && employee.getUpdateAt().isAfter(ifUnmodifiedSince)) {
-//                        throw new ResourceModifiedException(STEP_MODIFIED, employee.getUpdateAt());
-//                    }
-//                    final EmployeeDTO employeeDTO;
-//                    try {
-//                        employeeDTO = objectMapper.treeToValue(jsonPatch.apply(objectMapper.convertValue(employee,
-//                                JsonNode.class)), PowerPatchDTO.class);
-//                    } catch (JsonPatchException | JsonProcessingException e) {
-//                        throw new EmployeeException(INVALID_REQUEST);
-//                    }
-//                    this.validateDTO(employeeDTO);
-//                    final EmployeeInput input = transformerRegistry.getPluginFor(Power.STRENGTH,
-//                                    () -> new EmployeeException(MISSING_PLUGINS))
-//                            .toDomain(employeeDTO);
-//                    return service.save(creator.toDomain(input));
-//                })
-//                .map(assembler::toModel)
-//                .orElseThrow(() -> new EmployeeException(EMPLOYEE_NOT_FOUND, id));
-//        return new ResponseEntity<>(employeeModel, HttpStatus.OK);
-//    }
-//
-//        if (employee.ifUnmodifiedSince.isAfter(originalEmployee.get().getUpdateAt())) {
-//
-//        }
-//        final Employee saved = originalEmployee.map(employee -> {
-//            this.validateDTO(employeeDTO);
-//            employee.setFirstName(employee.getFirstName());
-//            employee.setLastName(employee.getLastName());
-//            return service.save(employee);
-//        }).orElseThrow(() -> {
-//            throw new EmployeeException(EMPLOYEE_NOT_FOUND, id);
-//        });
-//        return new ResponseEntity<>(assembler.toModel(saved), HttpStatus.ACCEPTED);
-//    }
-//
-//    @PostMapping("update-power/{id}")
-//    public ResponseEntity insertNewEmployee(@RequestBody EmployeeDto EmployeeDto, @PathVariable Long id) {
-//        return ResponseEntity.ok(service.updateEmployee(EmployeeDto, id));
-//    }
-//
-//    @PostMapping("raise-salary/{id}")
-//    public ResponseEntity raiseSalary(@RequestBody EmployeeDto employeeDto, @PathVariable Long id) {
-//        return ResponseEntity.ok(service.raiseEmployee(employeeDto, id));
-//    }
+    @PatchMapping(value = "update-weakness/{id}", consumes = "application/json-patch+json")
+    @Transactional
+    public ResponseEntity<EmployeeModel> updateWeakness(@PathVariable UUID id,
+                                                        @RequestHeader(name = IF_UNMODIFIED_SINCE) Instant
+                                                                ifUnmodifiedSince,
+                                                        @RequestBody @Valid WeaknessPatchDTO patchDTO) {
+        final EmployeeModel employeeModel = service.findById(id)
+                .map(employee -> {
+                    if (employee.getUpdateAt() != null && employee.getUpdateAt().isAfter(ifUnmodifiedSince)) {
+                        throw new ResourceModifiedException(STEP_MODIFIED, employee.getUpdateAt());
+                    }
+                    this.validateDTO(patchDTO);
+                    final EmployeeInput input = transformerRegistry.getPluginFor(Power.WEAKNESS,
+                                    () -> new EmployeeException(MISSING_PLUGINS))
+                            .toDomain(patchDTO);
+                    return service.updatePower(creator.toDomain(input), employee);
+                })
+                .map(assembler::toModel)
+                .orElseThrow(() -> new EmployeeException(RESOURCE_NOT_FOUND, id));
+        return new ResponseEntity<>(employeeModel, HttpStatus.ACCEPTED);
+    }
 
 
     private <T extends EmployeeDTO> void validateDTO(final T employeeDTO) {
