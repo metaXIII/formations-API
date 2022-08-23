@@ -31,6 +31,13 @@ public class EmployeeServiceImpl implements EmployeeService {
         return repository.save(employee);
     }
 
+    @Override
+    public Employee updatePower(final Employee toDomain, final Employee employee) {
+        final String strength = employee.getStrength() + ", " + toDomain.getStrength();
+        employee.setStrength(strength);
+        return repository.save(employee);
+    }
+
     //    @Override
 //    public void createNewEmployee(final EmployeeDto EmployeeDto) {
 //        final SalaryEntity salarySaved = salaryRepository.save(SalaryEntity.builder()

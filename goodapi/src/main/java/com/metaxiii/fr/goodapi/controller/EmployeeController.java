@@ -1,10 +1,5 @@
 package com.metaxiii.fr.goodapi.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.fge.jsonpatch.JsonPatch;
-import com.github.fge.jsonpatch.JsonPatchException;
 import com.metaxiii.fr.goodapi.assembler.EmployeeAssembler;
 import com.metaxiii.fr.goodapi.config.EmployeeValidator;
 import com.metaxiii.fr.goodapi.creator.EmployeeCreator;
@@ -40,7 +35,6 @@ import java.util.List;
 import java.util.UUID;
 
 import static com.metaxiii.fr.goodapi.exception.ErrorCode.EMPLOYEE_NOT_FOUND;
-import static com.metaxiii.fr.goodapi.exception.ErrorCode.INVALID_REQUEST;
 import static com.metaxiii.fr.goodapi.exception.ErrorCode.MISSING_PLUGINS;
 import static com.metaxiii.fr.goodapi.exception.ErrorCode.STEP_MODIFIED;
 import static org.springframework.http.HttpHeaders.IF_UNMODIFIED_SINCE;
@@ -54,7 +48,6 @@ public class EmployeeController {
     private final EmployeeValidator validator;
     private final PluginRegistry<EmployeeTransformerPlugin, Power> transformerRegistry;
     private final EmployeeCreator creator;
-    private final ObjectMapper objectMapper;
 
 
     @GetMapping("/employees")
@@ -85,29 +78,51 @@ public class EmployeeController {
     public ResponseEntity<EmployeeModel> updatePower(@PathVariable UUID id,
                                                      @RequestHeader(name = IF_UNMODIFIED_SINCE) Instant
                                                              ifUnmodifiedSince,
-                                                     @RequestBody JsonPatch jsonPatch) {
+                                                     @RequestBody @Valid PowerPatchDTO patchDTO) {
         final EmployeeModel employeeModel = service.findById(id)
                 .map(employee -> {
                     if (employee.getUpdateAt() != null && employee.getUpdateAt().isAfter(ifUnmodifiedSince)) {
                         throw new ResourceModifiedException(STEP_MODIFIED, employee.getUpdateAt());
                     }
-                    final EmployeeDTO employeeDTO;
-                    try {
-                        employeeDTO = objectMapper.treeToValue(jsonPatch.apply(objectMapper.convertValue(employee,
-                                JsonNode.class)), PowerPatchDTO.class);
-                    } catch (JsonPatchException | JsonProcessingException e) {
-                        throw new EmployeeException(INVALID_REQUEST);
-                    }
-                    this.validateDTO(employeeDTO);
+                    this.validateDTO(patchDTO);
                     final EmployeeInput input = transformerRegistry.getPluginFor(Power.STRENGTH,
                                     () -> new EmployeeException(MISSING_PLUGINS))
-                            .toDomain(employeeDTO);
-                    return service.save(creator.toDomain(input));
+                            .toDomain(patchDTO);
+                    return service.updatePower(creator.toDomain(input), employee);
                 })
                 .map(assembler::toModel)
                 .orElseThrow(() -> new EmployeeException(EMPLOYEE_NOT_FOUND, id));
         return new ResponseEntity<>(employeeModel, HttpStatus.OK);
     }
+
+//    @PatchMapping(value = "update-power/{id}", consumes = "application/json-patch+json")
+//    @Transactional
+//    public ResponseEntity<EmployeeModel> updatePower(@PathVariable UUID id,
+//                                                     @RequestHeader(name = IF_UNMODIFIED_SINCE) Instant
+//                                                             ifUnmodifiedSince,
+//                                                     @RequestBody JsonPatch jsonPatch) {
+//        final EmployeeModel employeeModel = service.findById(id)
+//                .map(employee -> {
+//                    if (employee.getUpdateAt() != null && employee.getUpdateAt().isAfter(ifUnmodifiedSince)) {
+//                        throw new ResourceModifiedException(STEP_MODIFIED, employee.getUpdateAt());
+//                    }
+//                    final EmployeeDTO employeeDTO;
+//                    try {
+//                        employeeDTO = objectMapper.treeToValue(jsonPatch.apply(objectMapper.convertValue(employee,
+//                                JsonNode.class)), PowerPatchDTO.class);
+//                    } catch (JsonPatchException | JsonProcessingException e) {
+//                        throw new EmployeeException(INVALID_REQUEST);
+//                    }
+//                    this.validateDTO(employeeDTO);
+//                    final EmployeeInput input = transformerRegistry.getPluginFor(Power.STRENGTH,
+//                                    () -> new EmployeeException(MISSING_PLUGINS))
+//                            .toDomain(employeeDTO);
+//                    return service.save(creator.toDomain(input));
+//                })
+//                .map(assembler::toModel)
+//                .orElseThrow(() -> new EmployeeException(EMPLOYEE_NOT_FOUND, id));
+//        return new ResponseEntity<>(employeeModel, HttpStatus.OK);
+//    }
 //
 //        if (employee.ifUnmodifiedSince.isAfter(originalEmployee.get().getUpdateAt())) {
 //

@@ -13,6 +13,8 @@ public interface EmployeeService {
 
     Employee save(Employee employee);
 
+    Employee updatePower(Employee toDomain, Employee employee);
+
 //    void createNewEmployee(EmployeeDto EmployeeDto);
 //
 //    EmployeeDto raiseEmployee(EmployeeDto employeeDto, Long id);
