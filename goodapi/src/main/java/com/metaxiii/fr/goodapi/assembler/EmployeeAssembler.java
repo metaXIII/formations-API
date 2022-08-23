@@ -20,6 +20,7 @@ public class EmployeeAssembler implements RepresentationModelAssembler<Employee,
                 .strength(entity.getStrength())
                 .weakness(entity.getWeakness())
                 .role(entity.getRole().name())
+                .salary(entity.getSalary().getAmount() + "$")
                 .build()
                 .add(linkTo(methodOn(EmployeeController.class).getEmployee(entity.getId())).withSelfRel())
                 .add(linkTo(methodOn(EmployeeController.class).allEmployees()).withRel("List of employees"));

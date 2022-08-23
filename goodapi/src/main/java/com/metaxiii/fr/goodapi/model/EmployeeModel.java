@@ -21,4 +21,5 @@ public class EmployeeModel extends RepresentationModel<EmployeeModel> {
     private String weakness;
     private String strength;
     private String role;
+    private String salary;
 }
