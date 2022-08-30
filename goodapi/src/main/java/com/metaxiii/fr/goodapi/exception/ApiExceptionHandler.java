@@ -1,5 +1,8 @@
 package com.metaxiii.fr.goodapi.exception;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -11,6 +14,11 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 @Slf4j
 @ControllerAdvice
 @Order(Ordered.HIGHEST_PRECEDENCE)
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "400",  description = "Bad Request", content = @Content),
+        @ApiResponse(responseCode = "403",  description = "Forbidden", content = @Content),
+        @ApiResponse(responseCode = "404",  description = "Resource not found", content = @Content)
+})
 public class ApiExceptionHandler {
     @ExceptionHandler(EmployeeException.class)
     public ResponseEntity<ErrorCodeDetail> handleServiceException(final EmployeeException exception) {
