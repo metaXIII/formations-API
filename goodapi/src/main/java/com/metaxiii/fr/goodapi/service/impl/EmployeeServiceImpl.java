@@ -37,38 +37,4 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setStrength(strength);
         return repository.save(employee);
     }
-
-    //    @Override
-//    public void createNewEmployee(final EmployeeDto EmployeeDto) {
-//        final SalaryEntity salarySaved = salaryRepository.save(SalaryEntity.builder()
-//                .amount(1000000L)
-//                .build());
-//        Employee employee = mapper.toEntity(EmployeeDto);
-//        employee.setRole(Role.EMPLOYEE);
-//        employee.setSalary(salarySaved);
-//        repository.save(employee);
-//    }
-//
-//    @Override
-//    public EmployeeDto raiseEmployee(final EmployeeDto employeeDto, final Long concernedEmployee) {
-//        final Employee asker = repository.findById(employeeDto.getId()).get();
-//        if (asker.getRole().equals(Role.ADMIN)) {
-//            final Employee raisedEmployee = repository.findById(concernedEmployee).get();
-//            final SalaryEntity newSalary = SalaryEntity.builder()
-//                    .id(concernedEmployee)
-//                    .amount(employeeDto.getSalary()).build();
-//            salaryRepository.save(newSalary);
-//            raisedEmployee.setSalary(newSalary);
-//            return mapper.toDto(raisedEmployee);
-//        }
-//        return mapper.toDto(repository.save(asker));
-//    }
-//
-//    @Override
-//    public EmployeeDto updateEmployee(final EmployeeDto employeeDto, final Long id) {
-//        final Employee e1 = mapper.toEntity(employeeDto);
-//        final Employee e2 = repository.findById(id).get();
-//        Employee employee = mapper.mapped(e1, e2);
-//        return mapper.toDto(repository.save(employee));
-//    }
 }
