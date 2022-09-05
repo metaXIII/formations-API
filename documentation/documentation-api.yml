@@ -673,7 +673,7 @@ paths:
         description: ''
 components:
   schemas:
-    User:
+    Employee:
       title: Employee
       type: object
       description: Description of employee

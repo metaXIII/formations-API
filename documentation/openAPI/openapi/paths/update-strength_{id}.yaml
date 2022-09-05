@@ -1,0 +1,124 @@
+parameters:
+  - schema:
+      type: string
+    name: id
+    in: path
+    required: true
+patch:
+  tags:
+    - Employee
+  summary: ''
+  operationId: patch-update-strength-id
+  responses:
+    '202':
+      description: Accepted
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              id:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              weakness:
+                type: string
+              strength:
+                type: string
+              role:
+                type: string
+              salary:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  amount:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                  List of employees:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+              created_at:
+                type: string
+              updated_at:
+                type: string
+            x-examples:
+              example-1:
+                id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                firstName: Bruce
+                lastName: Wayne
+                weakness: Too much money
+                strength: 'Better detective in the world, too much money'
+                role: ADMIN
+                salary:
+                  id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                  amount: 9223372036854776000
+                  created_at: '2022-09-05T11:40:08.202204Z'
+                  updated_at: '2022-09-05T11:40:08.202206Z'
+                _links:
+                  self:
+                    href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                  List of employees:
+                    href: 'http://localhost:8081/employees'
+                created_at: '2022-09-05T11:40:08.271081Z'
+                updated_at: '2022-09-05T11:40:08.271083Z'
+          examples:
+            example-1:
+              value:
+                id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                firstName: Bruce
+                lastName: Wayne
+                weakness: Too much money
+                strength: 'Better detective in the world, too much money'
+                role: ADMIN
+                salary:
+                  id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                  amount: 9223372036854776000
+                  created_at: '2022-09-05T11:40:08.202204Z'
+                  updated_at: '2022-09-05T11:40:08.202206Z'
+                _links:
+                  self:
+                    href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                  List of employees:
+                    href: 'http://localhost:8081/employees'
+                created_at: '2022-09-05T11:40:08.271081Z'
+                updated_at: '2022-09-05T11:40:08.271083Z'
+    '500':
+      description: Internal Server Error
+  description: Update Strength for employee
+  parameters:
+    - schema:
+        type: string
+      in: header
+      name: If-Unmodified-Since
+      description: Instant for checking idempotency
+    - schema:
+        type: string
+      in: header
+      name: Content-Type
+      description: application/json-patch+json
+  requestBody:
+    content:
+      application/json:
+        schema:
+          $ref: '#/components/schemas/StengthDTO'
+        examples:
+          example-1:
+            value:
+              strength: can go back in time
+    description: ''

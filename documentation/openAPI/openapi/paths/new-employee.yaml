@@ -1,0 +1,93 @@
+post:
+  tags:
+    - Employee
+  summary: ''
+  operationId: post-new-employee
+  responses:
+    '201':
+      description: Created
+      content:
+        application/json:
+          schema:
+            type: object
+            x-examples:
+              example-1:
+                id: af768e17-5c74-4801-a5df-1492472656e9
+                firstName: barry
+                lastName: Allen
+                weakness: 'flash on the highway, swallow bugs'
+                strength: super speed
+                role: EMPLOYEE
+                salary:
+                  id: d02fe52d-5afc-4a43-a40e-101ca015640c
+                  amount: 1000000
+                _links:
+                  self:
+                    href: 'http://localhost:8081/employee/af768e17-5c74-4801-a5df-1492472656e9'
+                  List of employees:
+                    href: 'http://localhost:8081/employees'
+            properties:
+              id:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              weakness:
+                type: string
+              strength:
+                type: string
+              role:
+                type: string
+              salary:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  amount:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+              created_at:
+                type: string
+              updated_at:
+                type: string
+              _links:
+                type: object
+                properties:
+                  self:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+                  List of employees:
+                    type: object
+                    properties:
+                      href:
+                        type: string
+    '500':
+      description: Internal Server Error
+  description: Insert new employee
+  parameters:
+    - schema:
+        type: string
+      in: header
+      name: Content-Type
+      description: application/json
+  requestBody:
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            firstName:
+              type: string
+            lastName:
+              type: string
+            weakness:
+              type: string
+            strength:
+              type: string
+    description: Input DTO

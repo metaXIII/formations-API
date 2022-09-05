@@ -1,0 +1,11 @@
+type: object
+x-examples:
+  example-1:
+    strength: can go back in time
+examples:
+  - amount: 3000000
+description: For update weakness
+title: WeaknessDTO
+properties:
+  amount:
+    type: number
