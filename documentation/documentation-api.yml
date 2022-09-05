@@ -1,0 +1,782 @@
+openapi: 3.1.0
+x-stoplight:
+  id: gprs7cwtwjebs
+info:
+  title: formations API sg
+  version: '1.0'
+servers:
+  - url: 'http://localhost:8081'
+paths:
+  /employees:
+    parameters: []
+    get:
+      summary: Get list of employees
+      tags: []
+      responses:
+        '200':
+          description: Employee Found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _embedded:
+                    type: object
+                    properties:
+                      employeeModelList:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                            firstName:
+                              type: string
+                            lastName:
+                              type: string
+                            weakness:
+                              type: string
+                            strength:
+                              type: string
+                            role:
+                              type: string
+                            salary:
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                amount:
+                                  type: integer
+                                created_at:
+                                  type: string
+                                updated_at:
+                                  type: string
+                            created_at:
+                              type: string
+                            updated_at:
+                              type: string
+                            _links:
+                              type: object
+                              properties:
+                                self:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+                                List of employees:
+                                  type: object
+                                  properties:
+                                    href:
+                                      type: string
+                x-examples:
+                  example-1:
+                    _embedded:
+                      employeeModelList:
+                        - id: 1466f6df-fa58-4836-8abd-c57133da3827
+                          firstName: Bruce
+                          lastName: Wayne
+                          weakness: Too much money
+                          strength: 'Better detective in the world, too much money'
+                          role: ADMIN
+                          salary:
+                            id: 95d0ec5d-65ed-4271-bf7f-7de68b779065
+                            amount: 9223372036854776000
+                            created_at: '2022-09-05T11:33:49.634999Z'
+                            updated_at: '2022-09-05T11:33:49.635Z'
+                          created_at: '2022-09-05T11:33:49.681245Z'
+                          updated_at: '2022-09-05T11:33:49.681246Z'
+                          _links:
+                            self:
+                              href: 'http://localhost:8081/employee/1466f6df-fa58-4836-8abd-c57133da3827'
+                            List of employees:
+                              href: 'http://localhost:8081/employees'
+                        - id: 819ea3f0-d5c2-446a-8772-83e548b7c68e
+                          firstName: Clark
+                          lastName: Kent
+                          weakness: 'Green rocks, red rocks, blue rocks, let`s pretend he is scared of all rocks, and batman'
+                          strength: 'Physical strenght, can destroy the planet if he want it'
+                          role: EMPLOYEE
+                          salary:
+                            id: a731ef51-e3e2-43bd-a47e-d4c67f6cb1de
+                            amount: 1000000
+                            created_at: '2022-09-05T11:33:49.679997Z'
+                            updated_at: '2022-09-05T11:33:49.679997Z'
+                          created_at: '2022-09-05T11:33:49.684344Z'
+                          updated_at: '2022-09-05T11:33:49.684345Z'
+                          _links:
+                            self:
+                              href: 'http://localhost:8081/employee/819ea3f0-d5c2-446a-8772-83e548b7c68e'
+                            List of employees:
+                              href: 'http://localhost:8081/employees'
+              examples:
+                example:
+                  value:
+                    _embedded:
+                      employeeModelList:
+                        - id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                          firstName: Bruce
+                          lastName: Wayne
+                          weakness: Too much money
+                          strength: 'Better detective in the world, too much money'
+                          role: ADMIN
+                          salary:
+                            id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                            amount: 9223372036854776000
+                            created_at: '2022-09-05T11:40:08.202204Z'
+                            updated_at: '2022-09-05T11:40:08.202206Z'
+                          _links:
+                            self:
+                              href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                            List of employees:
+                              href: 'http://localhost:8081/employees'
+                          created_at: '2022-09-05T11:40:08.271081Z'
+                          updated_at: '2022-09-05T11:40:08.271083Z'
+                        - id: ab4daf14-99b0-4dd7-a49b-a5969a132e47
+                          firstName: Clark
+                          lastName: Kent
+                          weakness: 'Green rocks, red rocks, blue rocks, let`s pretend he is scared of all rocks, and batman'
+                          strength: 'Physical strenght, can destroy the planet if he want it'
+                          role: EMPLOYEE
+                          salary:
+                            id: 0e2543fe-57d9-4153-861f-f2186fa50f3d
+                            amount: 1000000
+                            created_at: '2022-09-05T11:40:08.268720Z'
+                            updated_at: '2022-09-05T11:40:08.268721Z'
+                          _links:
+                            self:
+                              href: 'http://localhost:8081/employee/ab4daf14-99b0-4dd7-a49b-a5969a132e47'
+                            List of employees:
+                              href: 'http://localhost:8081/employees'
+                          created_at: '2022-09-05T11:40:08.277347Z'
+                          updated_at: '2022-09-05T11:40:08.277347Z'
+                example-1:
+                  value:
+                    employeeModelList:
+                      - id: string
+                        firstName: string
+                        lastName: string
+                        weakness: string
+                        strength: string
+                        role: string
+                        salary:
+                          id: string
+                          amount: 0
+                        _links:
+                          self:
+                            href: string
+                          List of employees:
+                            href: string
+      operationId: get-list-of-employee
+      description: Retrieve informations for all employees
+      parameters: []
+  '/employee/{id}':
+    get:
+      summary: Get Employee By id
+      operationId: get-employee-by-id
+      responses:
+        '404':
+          description: Employee Not Found
+      description: Get Employee by UUID
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                weakness:
+                  type: string
+                strength:
+                  type: string
+                role:
+                  type: string
+                salary:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                    amount:
+                      type: integer
+                    created_at:
+                      type: string
+                    updated_at:
+                      type: string
+                _links:
+                  type: object
+                  properties:
+                    self:
+                      type: object
+                      properties:
+                        href:
+                          type: string
+                    List of employees:
+                      type: object
+                      properties:
+                        href:
+                          type: string
+                created_at:
+                  type: string
+                updated_at:
+                  type: string
+              x-examples:
+                example-1:
+                  id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                  firstName: Bruce
+                  lastName: Wayne
+                  weakness: Too much money
+                  strength: 'Better detective in the world, too much money'
+                  role: ADMIN
+                  salary:
+                    id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                    amount: 9223372036854776000
+                    created_at: '2022-09-05T11:40:08.202204Z'
+                    updated_at: '2022-09-05T11:40:08.202206Z'
+                  _links:
+                    self:
+                      href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                    List of employees:
+                      href: 'http://localhost:8081/employees'
+                  created_at: '2022-09-05T11:40:08.271081Z'
+                  updated_at: '2022-09-05T11:40:08.271083Z'
+            examples:
+              example:
+                value:
+                  id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                  firstName: Bruce
+                  lastName: Wayne
+                  weakness: Too much money
+                  strength: 'Better detective in the world, too much money'
+                  role: ADMIN
+                  salary:
+                    id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                    amount: 9223372036854776000
+                    created_at: '2022-09-05T11:40:08.202204Z'
+                    updated_at: '2022-09-05T11:40:08.202206Z'
+                  _links:
+                    self:
+                      href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                    List of employees:
+                      href: 'http://localhost:8081/employees'
+                  created_at: '2022-09-05T11:40:08.271081Z'
+                  updated_at: '2022-09-05T11:40:08.271083Z'
+        description: Get user by id
+      parameters: []
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+        description: UUID
+  /new-employee:
+    post:
+      summary: ''
+      operationId: post-new-employee
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                x-examples:
+                  example-1:
+                    id: af768e17-5c74-4801-a5df-1492472656e9
+                    firstName: barry
+                    lastName: Allen
+                    weakness: 'flash on the highway, swallow bugs'
+                    strength: super speed
+                    role: EMPLOYEE
+                    salary:
+                      id: d02fe52d-5afc-4a43-a40e-101ca015640c
+                      amount: 1000000
+                    _links:
+                      self:
+                        href: 'http://localhost:8081/employee/af768e17-5c74-4801-a5df-1492472656e9'
+                      List of employees:
+                        href: 'http://localhost:8081/employees'
+                properties:
+                  id:
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  weakness:
+                    type: string
+                  strength:
+                    type: string
+                  role:
+                    type: string
+                  salary:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      amount:
+                        type: integer
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      List of employees:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+      description: Insert new employee
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                firstName:
+                  type: string
+                lastName:
+                  type: string
+                weakness:
+                  type: string
+                strength:
+                  type: string
+        description: Input DTO
+  '/update-strength/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    patch:
+      summary: ''
+      operationId: patch-update-strength-id
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  weakness:
+                    type: string
+                  strength:
+                    type: string
+                  role:
+                    type: string
+                  salary:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      amount:
+                        type: integer
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      List of employees:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                x-examples:
+                  example-1:
+                    id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                    firstName: Bruce
+                    lastName: Wayne
+                    weakness: Too much money
+                    strength: 'Better detective in the world, too much money'
+                    role: ADMIN
+                    salary:
+                      id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                      amount: 9223372036854776000
+                      created_at: '2022-09-05T11:40:08.202204Z'
+                      updated_at: '2022-09-05T11:40:08.202206Z'
+                    _links:
+                      self:
+                        href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                      List of employees:
+                        href: 'http://localhost:8081/employees'
+                    created_at: '2022-09-05T11:40:08.271081Z'
+                    updated_at: '2022-09-05T11:40:08.271083Z'
+              examples:
+                example-1:
+                  value:
+                    id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                    firstName: Bruce
+                    lastName: Wayne
+                    weakness: Too much money
+                    strength: 'Better detective in the world, too much money'
+                    role: ADMIN
+                    salary:
+                      id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                      amount: 9223372036854776000
+                      created_at: '2022-09-05T11:40:08.202204Z'
+                      updated_at: '2022-09-05T11:40:08.202206Z'
+                    _links:
+                      self:
+                        href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                      List of employees:
+                        href: 'http://localhost:8081/employees'
+                    created_at: '2022-09-05T11:40:08.271081Z'
+                    updated_at: '2022-09-05T11:40:08.271083Z'
+      description: Update Strength for employee
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: If-Unmodified-Since
+          description: Instant for checking idempotency
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json-patch+json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/StengthDTO'
+            examples:
+              example-1:
+                value:
+                  strength: can go back in time
+        description: ''
+  '/update-weakness/{id}':
+    parameters:
+      - schema:
+          type: string
+        name: id
+        in: path
+        required: true
+    patch:
+      summary: Update Weakness
+      operationId: patch-update-weakness-id
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  firstName:
+                    type: string
+                  lastName:
+                    type: string
+                  weakness:
+                    type: string
+                  strength:
+                    type: string
+                  role:
+                    type: string
+                  salary:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                      amount:
+                        type: integer
+                      created_at:
+                        type: string
+                      updated_at:
+                        type: string
+                  _links:
+                    type: object
+                    properties:
+                      self:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                      List of employees:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                x-examples:
+                  example-1:
+                    id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                    firstName: Bruce
+                    lastName: Wayne
+                    weakness: Too much money
+                    strength: 'Better detective in the world, too much money'
+                    role: ADMIN
+                    salary:
+                      id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                      amount: 9223372036854776000
+                      created_at: '2022-09-05T11:40:08.202204Z'
+                      updated_at: '2022-09-05T11:40:08.202206Z'
+                    _links:
+                      self:
+                        href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                      List of employees:
+                        href: 'http://localhost:8081/employees'
+                    created_at: '2022-09-05T11:40:08.271081Z'
+                    updated_at: '2022-09-05T11:40:08.271083Z'
+              examples:
+                example-1:
+                  value:
+                    id: 1fb54392-8d55-45d4-84a4-4cd75809cf5f
+                    firstName: Bruce
+                    lastName: Wayne
+                    weakness: Too much money
+                    strength: 'Better detective in the world, too much money'
+                    role: ADMIN
+                    salary:
+                      id: 6d0b8d66-d63b-434b-874c-6b19e2a5d7b6
+                      amount: 9223372036854776000
+                      created_at: '2022-09-05T11:40:08.202204Z'
+                      updated_at: '2022-09-05T11:40:08.202206Z'
+                    _links:
+                      self:
+                        href: 'http://localhost:8081/employee/1fb54392-8d55-45d4-84a4-4cd75809cf5f'
+                      List of employees:
+                        href: 'http://localhost:8081/employees'
+                    created_at: '2022-09-05T11:40:08.271081Z'
+                    updated_at: '2022-09-05T11:40:08.271083Z'
+      description: Update weakness for employee
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: If-Unmodified-Since
+          description: Instant for checking idempotency
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json-patch+json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/WeknessDTO'
+            examples:
+              example-1:
+                value:
+                  strength: can go back in time
+        description: ''
+  '/raise-salary/{employee-id}/{salary-id}':
+    parameters:
+      - schema:
+          type: string
+        name: employee-id
+        in: path
+        required: true
+      - schema:
+          type: string
+        name: salary-id
+        in: path
+        required: true
+    patch:
+      summary: Raise Salary
+      operationId: patch-update-strength-id
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                  amount:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                x-examples:
+                  example-1:
+                    id: 0e2543fe-57d9-4153-861f-f2186fa50f3d
+                    amount: 3000000
+                    created_at: '2022-09-05T11:40:08.268720Z'
+                    updated_at: '2022-09-05T11:43:54.700435160Z'
+              examples:
+                example:
+                  value:
+                    id: 0e2543fe-57d9-4153-861f-f2186fa50f3d
+                    amount: 3000000
+                    created_at: '2022-09-05T11:40:08.268720Z'
+                    updated_at: '2022-09-05T11:43:54.700435160Z'
+      description: Update Strength for employee
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: If-Unmodified-Since
+          description: Instant for checking idempotency
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json-patch+json
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AmountDTO'
+            examples:
+              example-1:
+                value:
+                  strength: can go back in time
+        description: ''
+components:
+  schemas:
+    User:
+      title: Employee
+      type: object
+      description: Description of employee
+      examples:
+        - id: 37375a37-1498-462e-b450-c1de2c742a12
+          firstName: Bruce
+          lastName: Wayne
+          weakness: No Weakness allowed here
+          strength: All strength
+          role: ADMIN
+          salary:
+            id: 37375a37-1498-462e-b450-c1de2c742a12
+            amount: 1000000
+            created_at: '2022-08-30 13:05:38.863561'
+            update_at: '2022-08-30 13:05:38.863561'
+          created_at: '2022-08-30 13:05:38.863561'
+          update_at: '2022-08-30 13:05:38.863561'
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the given user.
+        firstName:
+          type: string
+        lastName:
+          type: string
+        weakness:
+          type: string
+        strength:
+          type: string
+        role:
+          type: string
+          enum:
+            - ADMIN
+            - EMPLOYEE
+        salary:
+          $ref: '#/components/schemas/Salary'
+        created_at:
+          type: string
+          format: date-time
+        update_at:
+          type: string
+          format: date-time
+      required:
+        - id
+        - firstName
+        - lastName
+        - role
+        - created_at
+        - update_at
+    Salary:
+      title: Salary
+      x-stoplight:
+        id: vu2wjcagkm2ya
+      type: object
+      properties:
+        id:
+          type: string
+        amount:
+          type: number
+        created_at:
+          type: string
+          format: date-time
+        update_at:
+          type: string
+          format: date-time
+      examples:
+        - id: string
+          amount: 1000000
+          created_at: '2022-08-30 13:05:38.863561'
+          update_at: '2022-08-30 13:05:38.863561'
+      description: Salary Model
+    StengthDTO:
+      type: object
+      properties:
+        strength:
+          type: string
+      x-examples:
+        example-1:
+          strength: can go back in time
+      examples:
+        - strength: can go back in time
+      description: For update strength
+    WeknessDTO:
+      type: object
+      x-examples:
+        example-1:
+          strength: can go back in time
+      examples:
+        - weakness: afraid of cops
+      description: For update weakness
+      title: WeaknessDTO
+      properties:
+        weakness:
+          type: string
+    AmountDTO:
+      type: object
+      x-examples:
+        example-1:
+          strength: can go back in time
+      examples:
+        - amount: 3000000
+      description: For update weakness
+      title: WeaknessDTO
+      properties:
+        amount:
+          type: number
