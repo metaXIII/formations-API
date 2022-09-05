@@ -12,6 +12,8 @@ public class SalaryAssembler implements RepresentationModelAssembler<Salary, Sal
         return SalaryModel.builder()
                 .id(salary.getId())
                 .amount(salary.getAmount())
+                .createdAt(salary.getCreatedAt())
+                .updatedAt(salary.getUpdateAt())
                 .build();
     }
 }

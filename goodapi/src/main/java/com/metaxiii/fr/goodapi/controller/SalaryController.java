@@ -50,9 +50,6 @@ public class SalaryController {
                                                    @RequestBody SalaryDto salaryDto) {
         final SalaryModel salaryModel = employeeService.findById(employeeId)
                 .map(asker -> {
-                    if (!asker.getSalary().getId().equals(salaryId)) {
-                        throw new EmployeeException(INVALID_REQUEST);
-                    }
                     if (asker.getRole().equals(Role.EMPLOYEE)) {
                         throw new EmployeeException(FORBIDDEN_REQUEST);
                     }
