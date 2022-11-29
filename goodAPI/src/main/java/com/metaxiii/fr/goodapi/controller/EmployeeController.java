@@ -15,6 +15,8 @@ import com.metaxiii.fr.goodapi.exception.ResourceModifiedException;
 import com.metaxiii.fr.goodapi.model.EmployeeModel;
 import com.metaxiii.fr.goodapi.service.EmployeeService;
 import com.metaxiii.fr.goodapi.transformer.EmployeeTransformerPlugin;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.http.HttpStatus;
@@ -29,8 +31,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.transaction.Transactional;
-import javax.validation.Valid;
 import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
