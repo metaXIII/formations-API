@@ -1,9 +1,9 @@
 package com.metaxiii.fr.goodapi.dto.input;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 
-import javax.validation.constraints.NotNull;
 
 @Builder
 @Getter
