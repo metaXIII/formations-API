@@ -9,10 +9,8 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class SalaryCreator implements DomainCreator<Salary, SalaryInput> {
 
-    @Override
-    public Salary toDomain(final SalaryInput salaryInput) {
-        return Salary.builder()
-                .amount(salaryInput.getAmount())
-                .build();
-    }
+  @Override
+  public Salary toDomain(final SalaryInput salaryInput) {
+    return Salary.builder().amount(salaryInput.getAmount()).build();
+  }
 }

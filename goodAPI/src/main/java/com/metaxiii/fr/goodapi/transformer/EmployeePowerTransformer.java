@@ -5,13 +5,12 @@ import com.metaxiii.fr.goodapi.dto.power.StrengthPatchDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EmployeePowerTransformer extends AbstractEmployeeTransformer<EmployeeInput, StrengthPatchDTO>
-        implements DTOCreator<EmployeeInput, StrengthPatchDTO> {
+public class EmployeePowerTransformer
+  extends AbstractEmployeeTransformer
+  implements DTOCreator<EmployeeInput, StrengthPatchDTO> {
 
-    @Override
-    public EmployeeInput toDomain(final StrengthPatchDTO employeeDTO) {
-        return super.toDomainInput(employeeDTO)
-                .strength(employeeDTO.getStrength())
-                .build();
-    }
+  @Override
+  public EmployeeInput toDomain(final StrengthPatchDTO employeeDTO) {
+    return toDomainInput().strength(employeeDTO.getStrength()).build();
+  }
 }

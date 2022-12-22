@@ -6,22 +6,25 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 
-
 @Builder
 @Getter
 public class EmployeeInput {
-    @NotNull
-    @NotEmpty
-    private String firstName;
-    @NotNull
-    @NotEmpty
-    private String lastName;
-    @NotNull
-    @NotEmpty
-    @Setter
-    private String weakness;
-    @NotNull
-    @NotEmpty
-    @Setter
-    private String strength;
+
+  @NotNull
+  @NotEmpty
+  private String firstName;
+
+  @NotNull
+  @NotEmpty
+  private String lastName;
+
+  @NotNull
+  @NotEmpty
+  @Setter
+  private String weakness;
+
+  @NotNull
+  @NotEmpty
+  @Setter
+  private String strength;
 }

@@ -12,5 +12,6 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SalaryDto {
-    private Long amount;
+
+  private Long amount;
 }

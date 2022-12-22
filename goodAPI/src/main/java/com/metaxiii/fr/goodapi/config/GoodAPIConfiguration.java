@@ -5,8 +5,5 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.plugin.core.config.EnablePluginRegistries;
 
 @Configuration(proxyBeanMethods = false)
-@EnablePluginRegistries({
-        EmployeeTransformerPlugin.class
-})
-public class GoodAPIConfiguration {
-}
+@EnablePluginRegistries({ EmployeeTransformerPlugin.class })
+public class GoodAPIConfiguration {}

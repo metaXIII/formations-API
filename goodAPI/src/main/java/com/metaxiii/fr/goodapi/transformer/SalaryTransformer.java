@@ -7,10 +7,8 @@ import org.springframework.stereotype.Component;
 @Component
 public class SalaryTransformer implements DTOCreator<SalaryInput, SalaryDto> {
 
-    @Override
-    public SalaryInput toDomain(final SalaryDto salaryDto) {
-        return SalaryInput.builder()
-                .amount(salaryDto.getAmount())
-                .build();
-    }
+  @Override
+  public SalaryInput toDomain(final SalaryDto salaryDto) {
+    return SalaryInput.builder().amount(salaryDto.getAmount()).build();
+  }
 }

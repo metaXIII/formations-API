@@ -9,14 +9,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class StrengthPatchDTO extends EmployeeDTO {
-    @NotNull
-    @NotEmpty
-    private String strength;
+
+  @NotNull
+  @NotEmpty
+  private String strength;
 }

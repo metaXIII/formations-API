@@ -1,4 +1,4 @@
-package com.metaxiii.fr.goodapi.creator;
+package com.metaxiii.fr.goodapi.creator.employee;
 
 import com.metaxiii.fr.goodapi.dto.EmployeeDTO;
 import com.metaxiii.fr.goodapi.dto.input.EmployeeInput;
@@ -13,15 +13,15 @@ import org.springframework.stereotype.Service;
 @AllArgsConstructor
 public class PowerCreatorPlugin implements EmployeeTransformerPlugin {
 
-    private final EmployeePowerTransformer transformer;
+  private final EmployeePowerTransformer transformer;
 
-    @Override
-    public EmployeeInput toDomain(final EmployeeDTO employeeDTO) {
-        return transformer.toDomain((StrengthPatchDTO) employeeDTO);
-    }
+  @Override
+  public EmployeeInput toDomain(final EmployeeDTO employeeDTO) {
+    return transformer.toDomain((StrengthPatchDTO) employeeDTO);
+  }
 
-    @Override
-    public boolean supports(final Power power) {
-        return Power.STRENGTH == power;
-    }
+  @Override
+  public boolean supports(final Power power) {
+    return Power.STRENGTH == power;
+  }
 }

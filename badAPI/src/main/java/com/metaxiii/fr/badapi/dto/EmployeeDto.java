@@ -7,17 +7,18 @@ import lombok.Setter;
 @Getter
 @Setter
 public class EmployeeDto {
-    private Long id;
 
-    private String firstName;
+  private Long id;
 
-    private String lastName;
+  private String firstName;
 
-    private String weakness;
+  private String lastName;
 
-    private String strength;
+  private String weakness;
 
-    private Role role;
+  private String strength;
 
-    private Long salary;
+  private Role role;
+
+  private Long salary;
 }

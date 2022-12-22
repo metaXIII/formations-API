@@ -25,22 +25,23 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 public class EmployeeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
-    private String firstName;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    private String lastName;
+  private String firstName;
 
-    private String weakness;
+  private String lastName;
 
-    private String strength;
+  private String weakness;
 
-    @Enumerated(EnumType.STRING)
-    private Role role = Role.EMPLOYEE;
+  private String strength;
 
-    @ManyToOne
-    @JoinColumn(name = "salary_id")
-    private SalaryEntity salary;
+  @Enumerated(EnumType.STRING)
+  private Role role = Role.EMPLOYEE;
+
+  @ManyToOne
+  @JoinColumn(name = "salary_id")
+  private SalaryEntity salary;
 }
