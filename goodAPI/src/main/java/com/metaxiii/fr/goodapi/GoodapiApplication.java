@@ -6,8 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class GoodapiApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(GoodapiApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(GoodapiApplication.class, args);
+  }
 }

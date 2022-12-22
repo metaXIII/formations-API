@@ -5,6 +5,4 @@ import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
 @NoArgsConstructor
-public abstract class EmployeeDTO {
-
-}
+public abstract class EmployeeDTO {}
