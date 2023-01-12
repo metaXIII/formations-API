@@ -22,7 +22,6 @@ import com.metaxiii.fr.goodapi.transformer.EmployeeTransformerPlugin;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import java.time.Instant;
-import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import org.springframework.hateoas.CollectionModel;
@@ -50,16 +49,14 @@ public class EmployeeController {
   private final EmployeeCreator creator;
 
   @GetMapping("/employees")
-  @Transactional
   public ResponseEntity<CollectionModel<EmployeeModel>> allEmployees() {
-    final List<Employee> employees = service.findAll();
+    final var employees = service.findAll();
     return new ResponseEntity<>(assembler.toCollectionModel(employees), HttpStatus.OK);
   }
 
   @GetMapping("/employee/{id}")
-  @Transactional
   public ResponseEntity<EmployeeModel> getEmployee(@PathVariable UUID id) {
-    final Employee employee = service.findById(id).orElseThrow(() -> new EmployeeException(RESOURCE_NOT_FOUND, id));
+    final var employee = service.findById(id).orElseThrow(() -> new EmployeeException(RESOURCE_NOT_FOUND, id));
     return new ResponseEntity<>(assembler.toModel(employee), HttpStatus.OK);
   }
 
